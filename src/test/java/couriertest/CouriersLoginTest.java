@@ -1,5 +1,6 @@
-package courier;
+package couriertest;
 
+import courier.*;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
 import org.junit.After;
@@ -41,6 +42,7 @@ public class CouriersLoginTest {
     }
 
     @Test
+    @DisplayName("авторизация курьера без пароля")
     public void authorizationWithoutAPassword() {
         // авторизация курьера без пароля
         Credentials credentials1 = new Credentials(courier.getLogin());

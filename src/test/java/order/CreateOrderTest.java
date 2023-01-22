@@ -1,5 +1,6 @@
 package order;
 
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,7 +25,7 @@ public class CreateOrderTest {
     private String comment;
     private ArrayList<String> color;
 
-    public CreateOrder(String firstName, String lastName, String address, int metroStation, String phone, int rentTime, String deliveryDate, String comment, ArrayList<String> color) {
+    public CreateOrderTest(String firstName, String lastName, String address, int metroStation, String phone, int rentTime, String deliveryDate, String comment, ArrayList<String> color) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
@@ -46,6 +47,7 @@ public class CreateOrderTest {
     }
 
     @Test
+    @DisplayName("Создание заказа")
     public void createCheckOrder() {
         Order order = new Order(firstName, lastName, address, metroStation, phone, rentTime, deliveryDate, comment, color);
         ValidatableResponse checkOrder = request.createOrder(order);

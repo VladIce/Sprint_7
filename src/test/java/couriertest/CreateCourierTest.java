@@ -1,4 +1,6 @@
-package courier;
+package couriertest;
+import courier.*;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
 import org.junit.After;
 import org.junit.Before;
@@ -23,6 +25,7 @@ public class CreateCourierTest {
     }
 
     @Test
+    @DisplayName("повтроное создание сущетвующего курьера в системе")
     public void requestWithDuplicateLogin() {
         // запрос, на повтроное создание сущетвующего курьера в системе
         ValidatableResponse creatingCourierWithRecurringLogin = request.create(courier);
@@ -30,6 +33,7 @@ public class CreateCourierTest {
     }
 
     @Test
+    @DisplayName("создание нового курьера без пароля")
     public void requestWithoutPassword(){
         // запрос, на создание нового курьера без пароля
         Credentials credentials = new Credentials(courier.getLogin());
@@ -38,14 +42,11 @@ public class CreateCourierTest {
     }
 
 
-
-
-
     @After
     public void deleteCourier() {
-        // запрос для получения id курьера в системе
-        ValidatableResponse getLoginCourier = request.loginCourierOfSystem(courier);
-        idCourier = response.loginSuccessfully(getLoginCourier);
+        // авторизация курьера в системе
+        ValidatableResponse authorizationCourier = request.loginCourierOfSystem(courier);
+        idCourier = response.loginSuccessfully(authorizationCourier);
 
         // Удаляем и проверяем, что курьера был удалён из системы после теста
         ValidatableResponse deleteCourier = request.deleteCourier(idCourier);
